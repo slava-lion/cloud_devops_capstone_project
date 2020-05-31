@@ -13,6 +13,11 @@ Parameters:
     Type: String
     Default: 10.0.0.0/16
 
+  EKSClusterIAMRole: 
+    Description: Please enter the name of EKS Cluster IAM Role
+    Type: String
+
+
 Resources:
 
   VPC: 
@@ -23,3 +28,19 @@ Resources:
       Tags: 
         - Key: Name 
           Value: !Ref EnvironmentName
+
+  EKSIAMRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - eks.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      RoleName: !Ref EKSClusterIAMRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
