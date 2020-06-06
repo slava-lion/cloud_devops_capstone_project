@@ -37,8 +37,8 @@ Blue/Green Deployment IAM Policy
 Create new user 'jenkins' with group jenkins and assigned bllue/green deployment policy
 
 Create Jenkins EC2 instance with inbiund rules
- > Custom  TCP	    8080	myIP	-
- > SSH	    TCP	    22	    myIP	-
+ > `Custom  TCP	    8080	myIP	-`
+ > `SSH	    TCP	    22	    myIP	-`
 
 install jenkins
 
@@ -61,3 +61,36 @@ add hadolint to the path
 install docker https://docs.docker.com/engine/install/ubuntu/#installation-methods
 `sudo apt install docker.io`
 
+to fix "Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post http://%2Fvar%2Frun%2Fdocker.sock/v1.40/build"
+`sudo chmod 666 /var/run/docker.sock`
+
+Install the AWS CLI https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html
+```
+sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+ubuntu@ip-10-0-1-47:~$ aws --version
+aws-cli/2.0.19 Python/3.7.3 Linux/4.15.0-1065-aws botocore/2.0.0dev23
+aws configure
+... copy jenkins user credentials from csv file
+```
+
+Install and configure kubectl
+```
+curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.16.8/2020-04-16/bin/linux/amd64/kubectl
+curl -o kubectl.sha256 https://amazon-eks.s3.us-west-2.amazonaws.com/1.16.8/2020-04-16/bin/linux/amd64/kubectl.sha256
+openssl sha1 -sha256 kubectl
+chmod +x ./kubectl
+mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+ubuntu@ip-10-0-1-47:~$ kubectl version --short --client
+Client Version: v1.16.8-eks-e16311
+```
+
+install eksctl
+```
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+sudo mv /tmp/eksctl /usr/local/bin
+ubuntu@ip-10-0-1-47:~$ eksctl version
+0.21.0
+```
