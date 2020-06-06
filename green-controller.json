@@ -1,0 +1,34 @@
+{
+    "kind": "ReplicationController",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "green"
+    },
+    "spec": {
+        "replicas": 1,
+        "selector": {
+            "app": "green"
+        },
+        "template": {
+            "metadata": {
+                "name": "green",
+                "labels": {
+                    "app": "green"
+                }
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "name": "green",
+                        "image": "slavalion/priceprediction",
+                        "ports": [
+                            {
+                                "containerPort": 80
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}

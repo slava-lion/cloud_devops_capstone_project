@@ -87,6 +87,15 @@ pipeline {
 				}
 			}
 		}
+        stage('Green deploy') {
+			steps {
+				withAWS(region:'us-west-2', credentials:'aws-esk') {
+					sh '''
+						kubectl apply -f ./green-controller.json
+					'''
+				}
+			}
+		}
 
 	}
 }
