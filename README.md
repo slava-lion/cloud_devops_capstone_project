@@ -37,9 +37,27 @@ Blue/Green Deployment IAM Policy
 Create new user 'jenkins' with group jenkins and assigned bllue/green deployment policy
 
 Create Jenkins EC2 instance with inbiund rules
-Custom  TCP	    8080	myIP	-
-SSH	    TCP	    22	    myIP	-
+ > Custom  TCP	    8080	myIP	-
+ > SSH	    TCP	    22	    myIP	-
 
 install jenkins
-install brew `sudo apt install linuxbrew-wrapper`  `brew update` `Ctrl-D`
-install hadolint  `brew install hadolint`
+
+install pip3
+`sudo apt install python3-pip`
+install pylint
+`sudo pip3 install pylint`
+
+install brew 
+`sudo apt install linuxbrew-wrapper`
+`brew update` 
+`Ctrl-D`
+install hadolint  
+`brew install hadolint`
+
+add hadolint to the path
+`vi ~/.profile`
+`export PATH="$PATH:/home/ubuntu/.linuxbrew/Cellar/hadolint/1.18.0/bin/hadolint"`
+
+install docker https://docs.docker.com/engine/install/ubuntu/#installation-methods
+`sudo apt install docker.io`
+

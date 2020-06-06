@@ -25,7 +25,7 @@ pipeline {
 			steps {
 				sh '''
                     cd Docker/
-                    .\build_docker.sh
+                    bash build_docker.sh
                 '''
 			}
 		}
