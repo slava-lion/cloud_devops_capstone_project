@@ -7,15 +7,18 @@ pipeline {
                 sh '''
                     echo "Multiline shell steps works too"
                     ls -lah
+
+                    cd Docker/
+                    make install
                 '''
-                sh 'cd Docker/'
-        	    sh 'make install'
             }
         }
         stage('Lint docker and pyhton') {
             steps {
-        	    sh 'cd Docker/'
-        	    sh 'make lint'
+        	    sh '''
+                    cd Docker/
+        	        make lint
+                '''
             }
         }
 		
