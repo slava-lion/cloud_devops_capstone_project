@@ -70,7 +70,7 @@ pipeline {
 		}*/
         stage('Config kubectl context') {
 			steps {
-				withAWS(region:'us-east-2', credentials:'aws-esk') {
+				withAWS(region:'us-west-2', credentials:'aws-esk') {
 					sh '''
                         aws eks --region us-west-2 update-kubeconfig --name capstoneEks
 						kubectl config use-context arn:aws:eks:us-west-2:980543251014:cluster/capstoneEks
@@ -78,6 +78,15 @@ pipeline {
 				}
 			}
 		}
-       
+        stage('Blue deploy') {
+			steps {
+				withAWS(region:'us-west-2', credentials:'aws-esk') {
+					sh '''
+						kubectl apply -f ./blue-controller.json
+					'''
+				}
+			}
+		}
+
 	}
 }

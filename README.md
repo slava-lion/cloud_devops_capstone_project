@@ -1,6 +1,12 @@
 # cloud_devops_capstone_project
 jenkins pipelene for building docker image and deploying it with a blue / green strategy to the AWS kubernates cluster
 
+Helpfull information
+https://medium.com/rackbrains/understanding-blue-green-deployments-c941a841bbdb
+https://medium.com/@andresaaap/jenkins-pipeline-for-blue-green-deployment-using-aws-eks-kubernetes-docker-7e5d6a401021
+https://medium.com/@andresaaap/simple-blue-green-deployment-in-kubernetes-using-minikube-b88907b2e267
+
+
 Setup
 ```
  > cd CloudFormation/
@@ -129,3 +135,9 @@ create / update config https://docs.aws.amazon.com/eks/latest/userguide/create-k
 ubuntu@ip-10-0-1-47:/var/lib/jenkins$ aws eks --region us-west-2 update-kubeconfig --name capstoneEks
 Updated context arn:aws:eks:us-west-2:980543251014:cluster/capstoneEks in /home/ubuntu/.kube/config
 ```
+
+Replication controller
+https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/
+Pod overview 
+https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/ 
+
