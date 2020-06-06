@@ -45,28 +45,38 @@ pipeline {
 				}
 			}
 		}
-        stage('Create kubernetes cluster') {
+        /*stage('Create kubernetes cluster') {
 			steps {
 				withAWS(region:'us-west-2', credentials:'aws-esk') {
 					sh '''
 						eksctl create cluster \
-						--name capstoneEks \
-						--version 1.16 \
-						--nodegroup-name standard-workers \
-						--node-type t2.small \
-						--nodes 2 \
-						--nodes-min 1 \
-						--nodes-max 3 \
-						--node-ami auto \
-						--region us-west-2 \
-						--zones us-west-2a \
-						--zones us-west-2b \
-						--zones us-west-2c \
+                            --name capstoneEks \
+                            --version 1.16 \
+                            --nodegroup-name standard-workers \
+                            --node-type t2.small \
+                            --nodes 2 \
+                            --nodes-min 1 \
+                            --nodes-max 3 \
+                            --node-ami auto \
+                            --region us-west-2 \
+                            --zones us-west-2a \
+                            --zones us-west-2b \
+                            --zones us-west-2c \
+                        
+                        aws eks --region us-west-2 update-kubeconfig --name capstoneEks
+					'''
+				}
+			}
+		}*/
+        stage('Config kubectl context') {
+			steps {
+				withAWS(region:'us-east-2', credentials:'aws-esk') {
+					sh '''
+						kubectl config use-context arn:aws:eks:us-west-2:980543251014:cluster/capstoneEks
 					'''
 				}
 			}
 		}
-
        
 	}
 }

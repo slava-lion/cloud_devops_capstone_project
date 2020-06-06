@@ -36,33 +36,54 @@ Blue/Green Deployment IAM Policy
 
 Create new user 'jenkins' with group jenkins and assigned bllue/green deployment policy
 
-Create Jenkins EC2 instance with inbiund rules
+Create Jenkins EC2 instance with inbound rules
+```
  > `Custom  TCP	    8080	myIP	-`
  > `SSH	    TCP	    22	    myIP	-`
+```
 
 install jenkins
 
 install pip3
-`sudo apt install python3-pip`
+```
+sudo apt install python3-pip
+```
 install pylint
-`sudo pip3 install pylint`
+```
+sudo pip3 install pylint
+```
 
 install brew 
-`sudo apt install linuxbrew-wrapper`
-`brew update` 
-`Ctrl-D`
+```
+sudo apt install linuxbrew-wrapper
+brew update
+Ctrl-D
+```
 install hadolint  
-`brew install hadolint`
+```
+brew install hadolint
+```
 
 add hadolint to the path
 `vi ~/.profile`
 `export PATH="$PATH:/home/ubuntu/.linuxbrew/Cellar/hadolint/1.18.0/bin/hadolint"`
 
 install docker https://docs.docker.com/engine/install/ubuntu/#installation-methods
-`sudo apt install docker.io`
+```
+sudo apt install docker.io
+```
 
 to fix "Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post http://%2Fvar%2Frun%2Fdocker.sock/v1.40/build"
-`sudo chmod 666 /var/run/docker.sock`
+```
+sudo chmod 666 /var/run/docker.sock
+```
+
+create file with password for dockerHub
+```
+touch dockerHubPassword
+chmod 777 dockerHubPassword
+vi dockerHubPassword 
+```
 
 Install the AWS CLI https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html
 ```
@@ -93,4 +114,17 @@ curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/d
 sudo mv /tmp/eksctl /usr/local/bin
 ubuntu@ip-10-0-1-47:~$ eksctl version
 0.21.0
+```
+
+test that the cluster is ok
+```
+ubuntu@ip-10-0-1-47:~$ kubectl get svc
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.100.0.1   <none>        443/TCP   8m46s
+```
+
+create / update config https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html
+```
+ubuntu@ip-10-0-1-47:/var/lib/jenkins$ aws eks --region us-west-2 update-kubeconfig --name capstoneEks
+Updated context arn:aws:eks:us-west-2:980543251014:cluster/capstoneEks in /home/ubuntu/.kube/config
 ```
