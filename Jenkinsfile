@@ -33,7 +33,11 @@ pipeline {
 			steps {
 				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'DockerHub', usernameVariable: 'DOCKER_USER ', passwordVariable: 'DOCKER_PASSWORD ']]){
 					sh '''
-						docker login -u $DOCKER_USER  -p $DOCKER_PASSWORD 
+                        touch ~/dockerHubPassword
+                        echo $DOCKER_PASSWORD > ~/dockerHubPassword
+
+                        docker login --username $DOCKER_USER --password-stdin < ~/dockerHubPassword
+						
                         docker tag priceprediction slavalion/priceprediction
 						docker push slavalion/priceprediction
 					'''
