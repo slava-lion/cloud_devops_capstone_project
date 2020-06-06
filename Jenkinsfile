@@ -105,6 +105,11 @@ pipeline {
 				}
 			}
 		}
+        stage('Notification with pause') {
+            steps {
+                input "Now we will swich traffic to green"
+            }
+        }
         stage('Load balancer for redirection to green') {
 			steps {
 				withAWS(region:'us-west-2', credentials:'aws-esk') {
