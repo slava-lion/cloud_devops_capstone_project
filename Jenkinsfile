@@ -8,11 +8,14 @@ pipeline {
                     echo "Multiline shell steps works too"
                     ls -lah
                 '''
+                sh 'cd Docker/'
+        	    sh 'make install'
             }
         }
-        stage('Lint pyhton') {
+        stage('Lint docker and pyhton') {
             steps {
-        	    sh 'pylint --disable=R,C,W1203,W1202 Docker/app.py'
+        	    sh 'cd Docker/'
+        	    sh 'make lint'
             }
         }
 		
