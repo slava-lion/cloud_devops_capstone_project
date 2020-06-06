@@ -31,9 +31,9 @@ pipeline {
 		}
         stage('Push Image To Dockerhub') {
 			steps {
-				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'DockerHub', usernameVariable: 'DOCKER_USERNAME ', passwordVariable: 'DOCKER_PASSWORD ']]){
+				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'DockerHub', usernameVariable: 'DOCKER_USER ', passwordVariable: 'DOCKER_PASSWORD ']]){
 					sh '''
-						docker login -u $DOCKER_USERNAME  -p $DOCKER_PASSWORD 
+						docker login -u $DOCKER_USER  -p $DOCKER_PASSWORD 
                         docker tag priceprediction slavalion/priceprediction
 						docker push slavalion/priceprediction
 					'''
