@@ -29,6 +29,16 @@ pipeline {
                 '''
 			}
 		}
-
+        stage('Push Image To Dockerhub') {
+			steps {
+				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'DockerHub', usernameVariable: 'user', passwordVariable: 'password']]){
+					sh '''
+						docker login -u $user -p $password
+                        docker tag priceprediction slavalion/priceprediction
+						docker push slavalion/priceprediction
+					'''
+				}
+			}
+		}
 	}
 }
