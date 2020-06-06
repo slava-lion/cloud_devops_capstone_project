@@ -105,5 +105,14 @@ pipeline {
 				}
 			}
 		}
+        stage('Load balancer for redirection to green') {
+			steps {
+				withAWS(region:'us-west-2', credentials:'aws-esk') {
+					sh '''
+						kubectl apply -f ./blue-green-service.json
+					'''
+				}
+			}
+		}
 	}
 }
