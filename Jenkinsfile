@@ -21,6 +21,14 @@ pipeline {
                 '''
             }
         }
-		
+		stage('Build Docker Image') {
+			steps {
+				sh '''
+                    cd Docker/
+                    .\build_docker.sh
+                '''
+			}
+		}
+
 	}
 }
