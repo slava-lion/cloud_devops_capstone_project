@@ -104,6 +104,7 @@ openssl sha1 -sha256 kubectl
 chmod +x ./kubectl
 mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
 echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+sudo mv ./kubectl /usr/local/bin/kubectl
 ubuntu@ip-10-0-1-47:~$ kubectl version --short --client
 Client Version: v1.16.8-eks-e16311
 ```
