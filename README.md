@@ -40,4 +40,6 @@ Create Jenkins EC2 instance with inbiund rules
 Custom  TCP	    8080	myIP	-
 SSH	    TCP	    22	    myIP	-
 
-
+install jenkins
+install brew `sudo apt install linuxbrew-wrapper`  `brew update` `Ctrl-D`
+install hadolint  `brew install hadolint`
