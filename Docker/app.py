@@ -14,7 +14,7 @@ def scale(payload):
     """Scales Payload"""
     
     LOG.info(f"Scaling Payload: \n{payload}")
-    scaler = StandardScaler().fiiiit(payload.astype(float))
+    scaler = StandardScaler().fit(payload.astype(float))
     LOG.info(f"line 18 scaler : \n{scaler}")
     scaled_adhoc_predict = scaler.transform(payload.astype(float))
     LOG.info(f"line 20 scaled_adhoc_predict: \n{scaled_adhoc_predict}")
